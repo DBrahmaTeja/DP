@@ -22,7 +22,6 @@ int main()
     {
         max_interval=max(max_interval,arr[i][2]);
     }
-    cout<<max_interval<<endl;
     vector<int>prefix(max_interval+1);
     for(int i=0;i<arr.size();i++)
     {
@@ -32,27 +31,17 @@ int main()
         prefix[st]+=temp_cap;
         prefix[end]-=temp_cap;
     }
-    for(int i=0;i<prefix.size();i++)
-    {
-        cout<<prefix[i]<<" ";
-    }
-    int cur_cap=0;
+    
     for(int i=1;i<prefix.size();i++)
     {
         prefix[i]+=prefix[i-1];
     }
     for(int i=0;i<prefix.size();i++)
     {
-        cout<<prefix[i]<<" ";
-    }
-    for(int i=0;i<prefix.size();i++)
-    {
         if(prefix[i]>capacity)
         {
-            cout<<"False";
-            return 0;
+           return false;
         }
     }
-    cout<<"True"<<endl;
-    return 0;
+    return true;
 }
