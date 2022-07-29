@@ -53,7 +53,7 @@ while (i > 0 and j > 0)
     }
     else
     {
-        if (i > 1 and dp[i][j] == dp[i - 1][j])
+        if (dp[i][j] == dp[i - 1][j])
             i--;
         else
             j--;
