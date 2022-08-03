@@ -1,5 +1,6 @@
 /*
-Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
+Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that
+the sum of elements in both subsets is equal.
 
 
 
@@ -70,3 +71,43 @@ bool canPartition(vector<int> &nums)
 
     return dp[n - 1][k];
 }
+// Tabullization
+vector<vector<bool>> dp(n + 1, vector<bool>(k + 1, false));
+
+for (int i = 0; i <= n; i++)
+{
+    for (int j = 0; j <= k; j++)
+    {
+        if (j == 0)
+            dp[i][j] = true;
+        else if (i == 0)
+            dp[i][j] = false;
+
+        else if (j < nums[i - 1])
+            dp[i][j] = dp[i - 1][j];
+        else
+            dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
+    }
+}
+
+return dp[n][k];
+// space optimization
+
+vector<bool> prev(k + 1, false), cur(k + 1, false);
+
+prev[0] = true;
+for (int i = 1; i <= n; i++)
+{
+    for (int j = 0; j <= k; j++)
+    {
+        if (j == 0)
+            cur[j] = true;
+        else if (j < nums[i - 1])
+            cur[j] = prev[j];
+        else
+            cur[j] = prev[j] || prev[j - nums[i - 1]];
+    }
+    prev = cur;
+}
+
+return cur[k];

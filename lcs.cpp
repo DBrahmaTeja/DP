@@ -1,3 +1,6 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
 int fill(string s1, string s2, int i, int j, vector<vector<int>> &dp)
 {
     if (i < 0 or j < 0)
@@ -13,7 +16,7 @@ int fill(string s1, string s2, int i, int j, vector<vector<int>> &dp)
     }
     return dp[i][j];
 }
-int longestCommonSubsequence(string text1, string text2)
+string longestCommonSubsequence(string text1, string text2)
 {
     /*int n1=text1.size(),n2=text2.size();
     vector<vector<int>>dp(n1,vector<int>(n2,-1));
@@ -37,27 +40,34 @@ int longestCommonSubsequence(string text1, string text2)
                 dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
         }
     }
-    return dp[m][n];
-}
 
-// To print the LCS
-int i = m, j = n;
-vector<char> ans;
-while (i > 0 and j > 0)
-{
-    if (s1[i - 1] == s2[j - 1])
+    // To print the LCS
+    int i = m, j = n;
+    string ans;
+    while (i > 0 and j > 0)
     {
-        ans.push_back(s1[i - 1]);
-        i--;
-        j--;
-    }
-    else
-    {
-        if (dp[i][j] == dp[i - 1][j])
+        if (text1[i - 1] == text2[j - 1])
+        {
+            ans.push_back(text1[i - 1]);
             i--;
-        else
             j--;
+        }
+        else
+        {
+            if (dp[i][j] == dp[i - 1][j])
+                i--;
+            else
+                j--;
+        }
     }
+    reverse(ans.begin(), ans.end());
+    return ans;
 }
-reverse(ans.begin(), ans.end());
-return ans;
+int main()
+{
+
+    string s1 = "brute";
+    string s2 = "groot";
+
+    cout << "The Longest Common sequence is " << longestCommonSubsequence(s1, s2);
+}

@@ -46,7 +46,8 @@ Output: 4
         TC: O(n^2);
         SC: O(n);
         */
-        //Using LowerBound Method if it is less than all prev ele it is  push_backed otherwise it will be swapped with its lower bound element at last return the size of V.
+        //Using LowerBound Method if it is less than all prev ele it is  push_backed otherwise it will be swapped with its lower bound element
+        // at last return the size of V.
         int n = nums.size();
         vector<int> v;
         int max_1 = INT_MIN;
