@@ -10,7 +10,7 @@ bool cmp(vector<int>a1,vector<int>a2)
 }
 int main()
 {
-    int capacity=11;
+    /*int capacity=11;
     
     vector<vector<int>>arr;
     arr.push_back({3,2,7});
@@ -43,5 +43,30 @@ int main()
            return false;
         }
     }
-    return true;
+    return true;*/
+    int n,m;
+    cin>>n;
+    cin>>m;
+    vector<int>sprints(m);
+    for(int i=0;i<m;i++)
+    cin>>sprints[i];
+    vector<int>visits(n+1,0);
+    for(int i=0;i<m-1;i++)
+    {
+        int st=sprints[i]<sprints[i+1]?sprints[i]:sprints[i+1];
+        int end=sprints[i]>sprints[i+1]?sprints[i]:sprints[i+1];
+        visits[st]+=1;
+        if(end<n)
+        visits[end+1]-=1;
+    }
+    
+    for(int i=1;i<=n;i++)
+    visits[i]=visits[i-1]+visits[i];
+    int ans=1;
+    for(int i=2;i<=n;i++)
+    {
+        if(visits[ans]<visits[i])
+        ans=i;
+    }
+    return ans;
 }
